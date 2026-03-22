@@ -1,0 +1,7 @@
+__pycache__
+*.pyc
+venv
+static/results/*.pdf
+.git
+.env
+__pycache__/

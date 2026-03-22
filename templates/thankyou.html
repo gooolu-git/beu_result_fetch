@@ -2,27 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Process Complete | BEU Engine</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230f172a'%3E%3Cpath d='M12 3L1 9l11 6 9-4.91V17h2V9L12 3z'/%3E%3Cpath d='M5 13.18v4.59c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-4.59l-7 3.82-7-3.82z'/%3E%3C/svg%3E">    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
+        }
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #ffffff; 
-            height: 100vh; 
+            height: 100vh;
+            height: 100dvh; /* Prevents mobile browser bar from causing scroll */
             display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
+            flex-direction: column;
+            overflow: hidden; /* Strictly no scrollbars */
+            margin: 0;
         }
+
+        /* Navbar with Hamburger Support */
+        .navbar { 
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+        .navbar-brand { font-weight: 800; letter-spacing: -0.5px; font-size: 1.25rem; color: var(--primary) !important; }
+        
+        .btn-github {
+            background: var(--primary); color: white !important;
+            border-radius: 10px; font-weight: 600; font-size: 0.85rem;
+            padding: 8px 18px; text-decoration: none;
+        }
+
+        .btn-nav-outline {
+            background: transparent; color: var(--primary) !important;
+            border: 1px solid var(--border);
+            border-radius: 10px; font-weight: 600; font-size: 0.85rem;
+            padding: 8px 18px; text-decoration: none;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse { margin-top: 15px; padding-bottom: 10px; }
+            .btn-nav-outline, .btn-github { display: block; width: 100%; margin: 5px 0; text-align: center; }
+        }
+
+        /* Success Card Styling */
+        .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .success-card { 
             max-width: 500px; 
-            padding: 50px; 
+            width: 100%;
+            padding: 40px; 
             border: 1px solid #f1f5f9; 
             border-radius: 32px; 
             box-shadow: 0 20px 50px rgba(0,0,0,0.05); 
+            text-align: center;
         }
+
         .btn-download { 
             background: #000; 
             color: #fff !important; 
@@ -30,46 +75,72 @@
             border-radius: 16px; 
             font-weight: 700; 
             text-decoration: none; 
-            display: inline-block; 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
             margin-top: 25px; 
+            width: 100%;
             transition: all 0.3s ease;
         }
         .btn-download:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .icon-check { font-size: 60px; color: #10b981; margin-bottom: 25px; }
-        .github-link { 
-            color: #64748b; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .github-link:hover { color: #000; }
+        .icon-check { font-size: 60px; color: #10b981; margin-bottom: 15px; }
+
+        .footer { padding: 15px 0; border-top: 1px solid var(--border); background: #fff; font-size: 0.85rem; }
     </style>
 </head>
 <body>
-    <div class="success-card">
-        <div class="icon-check">✓</div>
-        <h1 class="fw-800">Ready for Download</h1>
-        <p class="text-muted">Thank you for using the <b>BEU Result Engine</b>. Your batch has been processed and is ready to save.</p>
-        
-        <a href="{{ url_for('download_file', filename=file_name) }}" class="btn-download shadow">Download Combined PDF</a>
-        
-        <div class="mt-5">
-            <p class="small text-secondary mb-2">Check my work on</p>
-            <a href="https://github.com/gooolu-git" target="_blank" class="github-link">@gooolu-git</a>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="fa-solid fa-graduation-cap me-2 text-primary"></i>
+                BEU RESULT
+            </a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="ms-auto d-lg-flex align-items-center">
+                    <a href="mailto:gooooluraja@gmail.com" class="btn-nav-outline me-lg-2">
+                        <i class="fa-solid fa-envelope me-2"></i>Contact
+                    </a>
+                    <a href="https://hub.docker.com/r/gooolu/beu-result-engine" target="_blank" class="btn-nav-outline me-lg-2">
+                        <i class="fa-brands fa-docker me-2"></i>Docker Hub
+                    </a>
+                    <a href="https://github.com/gooolu-git" target="_blank" class="btn btn-github">
+                        <i class="fa-brands fa-github me-2"></i>GitHub
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="mt-4">
-            <a href="/" class="text-decoration-none small text-secondary">← Process another batch</a>
+    </nav>
+
+    <div class="main-container">
+        <div class="success-card">
+            <div class="icon-check">✓</div>
+            <h1 class="fw-800" style="font-size: 1.8rem;">Ready for Download</h1>
+            <p class="text-muted small">Your batch has been processed successfully. Your PDF is ready to be saved.</p>
+            
+            <a href="{{ url_for('download_file', filename=file_name) }}" class="btn-download shadow">
+                <i class="fa-solid fa-file-arrow-down me-2"></i> Save Combined PDF
+            </a>
+            
+            <div class="mt-4 pt-3 border-top">
+                <a href="/" class="text-decoration-none small fw-bold text-secondary">
+                    <i class="fa-solid fa-rotate-left me-1"></i> Process another batch
+                </a>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Start download automatically after a small delay
-        window.onload = function() {
-            setTimeout(() => {
-                window.location.href = "{{ url_for('download_file', filename=file_name) }}";
-            }, 800);
-        };
-    </script>
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="mb-0 text-muted">Crafted by <a href="https://github.com/gooolu-git" target="_blank" class="text-dark fw-bold text-decoration-none">Golu</a> &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
