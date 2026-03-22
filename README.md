@@ -1,5 +1,5 @@
 # BEU Result Engine 🎓
-### LIVE lINK :- https://beu-result-engine.onrender.com/
+### LIVE link :- https://beu-result-engine.onrender.com/
 
 A high-speed, automated batch downloader for **Bihar Engineering University (BEU)** results. This tool allows users to enter a range of registration numbers and a sample URL to generate a single, merged PDF containing all marksheets instantly.
 
