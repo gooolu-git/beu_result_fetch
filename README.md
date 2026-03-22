@@ -44,12 +44,13 @@ A high-speed, automated batch downloader for **Bihar Engineering University (BEU
     ```bash
     python app.py
     ```
-## 🚀 Deployment
+5.**🚀 Deployment**
 
 You can pull and run the latest version of the BEU Result Engine directly from Docker Hub:
 
 ```bash
 docker pull gooolu/beu-result-engine:latest
+```
 
 ## 📂 Project Structure
 
