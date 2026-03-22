@@ -13,7 +13,7 @@ app = Flask(__name__)
 STATIC_DIR = os.path.join('/tmp', 'results')
 os.makedirs(STATIC_DIR, exist_ok=True)
 
-CONCURRENCY_LIMIT = 5 # Reduced slightly for Render Free Tier stability
+CONCURRENCY_LIMIT = 15 # Reduced slightly for Render Free Tier stability
 MAX_TOTAL_SEARCHES = 60
 
 async def capture_single_pdf(semaphore, browser, target_url, reg_no):
