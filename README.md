@@ -26,7 +26,7 @@ A high-speed, automated batch downloader for **Bihar Engineering University (BEU
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/gooolu-git/beu-result-engine.git](https://github.com/gooolu-git/beu-result-engine.git)
+    git clone [https://github.com/gooolu-git/beu-result-engine.git
     cd beu-result-engine
     ```
 
